@@ -329,92 +329,7 @@ input[type=range]:focus::-ms-fill-upper {
 </div>
 
 
-<!--INTRODUCTION -->
-	<div class="welcome" id="slideShow"  style="display: none; z-index: 2000">
-		<div class="welcome_text" id="slide1" >
-			<h3>1 / 6</h3>
-			<h2>Представляем редактор LetsDraw!JS</h2>
-			<p>Он поможет вам создавать яркие и интересные обложки для ваших работ</p>
-			
-		</div>
-		<div class="welcome_text" id="slide2" style="display: none">
-			<h3>2 / 6</h3>
-			<div style="width: 50%; float: left">
-				<h2>Управляйте элементами</h2>
-				<p>Чтобы добавить элемент, нажмите правую кнопку мыши и выберите "Добавить". Также, доступны сочетания клавиш 
-					<span class="key">Ctrl</span>+<span  class="key">C</span>, <span class="key">Ctrl</span>+<span  class="key">V</span> и  <span class="key">Del</span></p>
-			</div>
-			<div style="float: left">
-				<img class="slidePicture" src="images/welcome/add.png"/>
-			</div>
-		</div>
-		<div class="welcome_text" id="slide3" style="display: none">
-			<h3>3 / 6</h3>
-			<div style="width: 50%; float: left">
-				<h2>Выравнивание</h2>
-				<p>Поможет выравнить элемент по-центру или по другим элементам. Вы можете отключить эту опцию в настройках</p>
-			</div>
-			<div style="float: left">
-				<img class="slidePicture" src="images/welcome/align.png"/>
-			</div>
-		</div>
-		<div class="welcome_text" id="slide4" style="display: none">
-			<h3>4 / 6</h3>
-		<div style="width: 50%; float: left">
-			<h2>Редактирование текста</h2>
-			<p>Настройка гарнитуры, заливки, обводки и другие возможности. Нажмите кнопку  <span class="key">+</span> рядом с полем выбора цвета, чтобы включить заливку градиентом</p>
-		</div>
-			<div style="float: left">
-				<img class="slidePicture"  src="images/welcome/text-edit.png"/>
-			</div>
-		</div>
-		<div class="welcome_text" id="slide5" style="display: none">
-			<h3>5 / 6</h3>
-			<div style="width: 50%; float: left">
-			<h2>Рисование от руки</h2>
-			<p>Рисуйте от руки и редактор автоматически сгладит ваш рисунок. </p>
-			</div>
-			<div style="float: left">
-					<img class="slidePicture"  src="images/welcome/paint.png"/>
-			</div>
 
-		</div>
-		<div class="welcome_text" id="slide6" style="display: none">
-			<h3>6 / 6</h3>
-		<div style="width: 50%; float: left">
-			<h2>Сохранение результатов</h2>
-			<p>Нажмите Сохранить, чтобы сохранить обложку для вашей работы. Вы можете вернуться к редактированию вновь в любой момент.</p>
-		</div>
-		<div style="float: left">
-				<img class="slidePicture"  src="images/welcome/paint.png"/>
-		</div>
-		</div>
-	<div style="clear: both; margin-left: 10%">
-		<a href="javascript:;" id="nextSlide" class="welcomeButton"> Далее </a>
-		<a href="javascript:;" id="skipSlide" class="welcomeButton"> Пропустить </a>
-	</div>
-	</div>
-
-	<script type="text/javascript">
-		var showSlides = true;
-		var currentIndexSlide = 1;
-		var countSlide = 6;
-		nextSlide.onclick = function(e){
-			document.getElementById("slide"+currentIndexSlide).style.display = "none";
-			currentIndexSlide++;
-			if(currentIndexSlide <= countSlide)
-				document.getElementById("slide"+currentIndexSlide).style.display = "block";
-			else
-				slideShow.style.display = "none";
-
-		}
-		skipSlide.onclick = function(e){
-			slideShow.style.display = "none";
-		}
-
-
-
-	</script>
 
 	<div class="welcome" id="resultID" style="display: none">	
 		<div class="welcome_text" style="width: 400px; margin: 0 auto; text-align: center" id="slide2">
@@ -425,23 +340,10 @@ input[type=range]:focus::-ms-fill-upper {
 			<a href="javascript:;" onclick="javascript:history.back();">Закрыть редактор</a>
 		</div>
 	</div>
-<!--END INRODUCTION -->
-
-<!--
-	<div style="height: 40px; border-bottom: 2px solid; padding: 10px; background: #fff">
-	<img src="images/logoWriter.png" style="float: left" width=40/> <h2 style="margin: 0; font-weight: normal"> Cover editor</h2>
-	
-</div> -->
 
 
-<div class="settingField" style="display: none">
-	<h2></h2>
-	<button id="addText">+ Добавить текст</button>
-	<button id="addRectangle">+ add rect</button>
-<textarea id="dataInfo"></textarea>
-	<button id="open">Open</button>
 
-</div>
+
 <div>
 	<div class="canvasPlace" style="margin: 0 auto; width: 600px">
 		<div class="container" >
@@ -449,13 +351,11 @@ input[type=range]:focus::-ms-fill-upper {
 			<div id="mainMenuID" class="mainMenu">
 				<img src="images/letsdraw.png" style="float: left; padding: 5px" height=40/> 
 				<ul>
-				<!--	<li id="">открыть</li>-->
 					<li id="addMenuItem">add</li>
 					<li id="editMenuItem">edit</li>
-				<!--	<li id="about">About</li> -->
+
 					<li id="save">save</li> 
-				<!--	<li id="getImage">Get image</li>-->
-			<!--		<li id="feedback"><img src="images/smile.png"/></li> -->
+			
 				</ul>
 				
 			</div>
@@ -485,11 +385,11 @@ input[type=range]:focus::-ms-fill-upper {
 
 	</div>
 </div>
+<textarea id="dataInfo" style="display: none"></textarea>
 <script src="3rd_party/jscolor.js"></script>
 <script src="3rd_party/b-spline.js"></script>
 <script src="lang.js" type="text/javascript"></script>
 <script src="letsDraw.js" type="text/javascript"></script>
-
 <script src="letsSaveDraw.js" type="text/javascript"></script>
 <script src="components.js" type="text/javascript"></script>
 <script>
@@ -513,7 +413,7 @@ LetsDraw(
 
 	}
 );
-//textLabel.eventClick("addText");
+
 var addMenuItem = document.getElementById("addMenuItem");
 addMenuItem.addEventListener("click",function(e){
 	LetsDraw.showElementsList();
@@ -535,46 +435,41 @@ editMenuItem.addEventListener("click",function(e){
 	  });
 	 LetsDraw.contextMenu.showMenu();
 })
+
 var idTextarea = document.getElementById("dataInfo");
 save.addEventListener("click", function(){
-	resultSave.innerText = "Ваша работа";
+	resultSave.innerText = "сохранение...";
 	LetsSaveDraw({
 		textarea: idTextarea
 	});
+	
 	var base64 = LetsDraw.GetBase64();
 	console.log(base64);
 	LetsDraw.getFinalImage("resultImageID");
 	var div = document.getElementById("resultID");
 	div.style.display = "block";
-//	ajaxSend(base64);
-});
-var open = document.getElementById("open");
-open.addEventListener("click", function(){
-	LetsOpenDraw(idTextarea.value);
-});
+	ajaxSend(base64);
+
+	});
+
 
 
 var ajaxSend = function( base64data, type = "image", part = 0 ){
 	var xhr = new XMLHttpRequest();
-	if(type == "image"){
-		var where =  "server/sendResultImage.php";
-	}
-	if(type == "source"){
-		var where =  "server/sendResultSource.php";
-	}
-	xhr.open("POST", "http://typicalwriter.ru/coverEditor/saveImage.php", true);
-	var body = "imgData="+base64data+"&dataSource="+idTextarea.value;
-	if(type == "source"){
-		body += "&part="+part;
-	}
+
+
+	xhr.open("POST", "http://bookleron.com/letsdraw/saveImage.php", true); //Insert your url here
+	var body = "imgData="+base64data;
+
+	
+	
+	
 	/**
 	 * Get params after hash # in url
 	 **/
 	var type =  window.location.hash.substr(1);
 	console.log(type);
-	if(type){
-		body +="&param="+type;
-	}
+
 
 
 	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset = UTF-8');
@@ -586,7 +481,7 @@ var ajaxSend = function( base64data, type = "image", part = 0 ){
 			var result = JSON.parse(this.response);
 			console.log(result);
 			if(result['result'] == "success"){
-				resultSave.innerText = "Saved";
+				resultSave.innerText = "Сохранено";
 				resultImageID.src = result['imgSrc'];
 			}
 			else{
@@ -601,21 +496,8 @@ var ajaxSend = function( base64data, type = "image", part = 0 ){
 	xhr.send(body);
 }
 
-var saveSource = function (){
-	var source = idTextarea.value;
-	var part1 = source.substr(0, source.length / 2);
-	var part2 = source.substr( source.length / 2, (source.length - source.length / 2));
-	ajaxSend(part1, "source", 0);
-	ajaxSend(part2, "source", 1);
-}
 
-/*var saveImage = document.getElementById("getImage");
-saveImage.addEventListener("click", function(){
-	console.log(123);
-	LetsDraw.getFinalImage("resultImageID");
-	var div = document.getElementById("resultID");
-	div.style.display = "block";
-});*/
+
 
 hidePanelButton.onclick = function(e){
 	if(rightTool.style.display == "none"){
@@ -635,13 +517,13 @@ hidePanelButton.onclick = function(e){
 	
 }
 
-/*	document.addEventListener('DOMContentLoaded', function(){ 
+	document.addEventListener('DOMContentLoaded', function(){ 
 		var xhr = new XMLHttpRequest();
 	preloaderText.innerText = "Загрузка...";
 	
 	
 	
-	xhr.open("POST", "http://typicalwriter.ru/coverEditor/openSource.php", true);
+	xhr.open("POST", "http://bookleron.com/letsdraw/openExample.php", true);
 	
 
 	
@@ -662,9 +544,9 @@ hidePanelButton.onclick = function(e){
 			var result = JSON.parse(this.response);
 			console.log(result);
 			if(result['result'] == "success"){
-				if(result['id'] > 0){
+				
 					LetsOpenDraw(result['data']);
-				}
+				
 				
 				preloaderDiv.style.display = "none";
 			}
@@ -682,7 +564,7 @@ hidePanelButton.onclick = function(e){
 	xhr.send(body);
 
 	});
-*/
+
 setTimeout(function(){
 	 preloaderDiv.style.display = "none";
 	
@@ -690,11 +572,7 @@ setTimeout(function(){
 
 </script>
 
-<!--Selected: <span id="selected"></span>-->
 
-<!--<div class="textLabel" contenteditable>
-	������� ����� �����
-</div>-->
 
 </body>
 </html>
