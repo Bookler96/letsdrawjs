@@ -1,0 +1,47 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mocha Tests</title>
+  <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="mocha"></div>
+
+  <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+  <script src="https://cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+  <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+	
+	<script src="../3rd_party/jscolor.js"></script>
+	<script src="../3rd_party/b-spline.js"></script>
+	<script src="../lang.js" type="text/javascript"></script>
+	<script src="../letsDraw.js" type="text/javascript"></script>
+
+	<script src="../letsSaveDraw.js" type="text/javascript"></script>
+	<script src="../components.js" type="text/javascript"></script>
+	
+<!-- подключаем chai -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
+  <!-- в chai есть много всего, выносим assert в глобальную область -->
+  <script>
+    var assert = chai.assert;
+  </script>
+
+  <script>
+  mocha.setup('bdd');
+ // var assert = require('assert');
+function hello(){
+    return "hello";
+}
+
+ describe('Array', function() {
+  describe('#indexOf()', function() {
+    it('should return hello', function() {
+      assert.equal("hello", hello());
+    });
+  });
+});
+ mocha.run();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,700 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Lobster|Open+Sans+Condensed:300|Play|Rubik+Mono+One" rel="stylesheet"> 
+<style>
+
+
+
+	body{
+		margin: 0;
+		padding: 0;
+		font-family: Verdana, Geneva, Tahoma, sans-serif;
+		background: #f9f9f9;
+	}
+	.textLabel{
+		position: absolute;
+		left: 0;
+		top: 0;
+		padding: 5px;
+	}
+	.textLabel:hover{
+		border: 1px dashed;
+		background: rgba(0.9,0.9,0.9,0.5);
+	}
+	
+	.propertyDiv{
+		font-family: Geneva, Arial, Helvetica, sans-serif;
+		position: absolute;
+		background: #fff;
+	/*	padding: 5px; */
+	/*	border: 1px solid rgba(128,128,128,1);*/
+	 	box-shadow: 0px 0px 38px -20px rgba(128,128,128,1);;
+		display: none;
+		min-width: 250px;
+		max-width: 300px;
+		z-index: 1;
+	}
+	
+	.propertyDiv ul{
+	
+		margin: 0px;
+		padding:0px;
+	}
+	
+	.propertyDiv li{
+		list-style: none;
+		padding: 5px;
+		border-bottom: 1px solid #f5f3f3;
+	}
+	
+	.propertyDiv li p{
+		padding-left: 10px;
+		font-style: italic;
+		margin: 0;
+	}
+
+	.propertyDiv li:hover{
+		background: #f5f3f3;
+		cursor: pointer;
+	}
+
+
+	.propertyDiv h3{
+		margin: 0;
+		padding: 10px;
+		border-left: 2px solid seagreen;
+		background: #f2f2f2;
+	}
+
+	.propertyDiv img{
+		float: left;
+		margin-right: 5px;
+	}
+
+	.propertyDiv textarea{
+		min-width: 100%;
+		max-width: 100%;
+	}
+
+	.rightToolBar{
+		width: 300px;
+		min-height: 100%; 
+		background: #fff; 
+		position: fixed; 
+		right:0; 
+		top:0;
+		transition-property: right;
+		transition-duration: 1s;
+	}
+	
+	.settingField{
+		width: 350px;
+		background: #DDF1F8;
+		height: 100%;
+		float: left
+	}
+	#canvas{ /*position: absolute; z-index: 1;*/ box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75); }
+	
+	.colorPlaceSelect{
+	/*	display: inline; */
+	}
+	
+	.colorSelectElement{
+		margin: 2px;
+		float: left;
+		border-radius: 25px;
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+	}
+
+	/**
+	* Main menu theme
+	*/
+
+	.mainMenu{
+		min-width: 500px;
+		margin: 0 auto;
+		font-size: 20px;
+	}
+
+	.mainMenu ul{
+		line-height: 2;
+	}
+
+	.mainMenu li{
+		padding: 5px;
+		
+		display: inline;
+	}
+
+	.mainMenu li:hover{
+		cursor: pointer;
+		background: #ccc;
+		color: #fff;
+	}
+
+	.menuButtonItem{
+		float: left;
+		width: 25px;
+		height: 25px;
+		text-align: center;
+		
+	}
+	.menuButtonItem:hover{
+		
+		-webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.75);
+		box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.75);
+	}
+	 .active{
+		-webkit-box-shadow: inset 0px 0px 3px 1px rgba(0,0,0,0.75);
+		-moz-box-shadow: inset 0px 0px 3px 1px rgba(0,0,0,0.75);
+		box-shadow: inset 0px 0px 3px 1px rgba(0,0,0,0.75);
+	}
+	.welcome{
+		position: absolute;
+		min-width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+		z-index: 3000;
+		background: #fff;
+		
+	}
+	.welcome_text{
+		margin: 10%;
+	}
+	.welcomeButton{
+		padding: 10px;
+		background: #808080;
+		color: #fff;
+		text-decoration: none;
+		margin: 5px;
+	}
+
+	.colorDiv input{
+		float: left;
+		border: 0;
+		height: 25px;
+		text-align: center;
+	}
+
+	#fixedTool textarea{
+		border: 2px solid;
+
+	}
+	#fixedTool select{
+		border: 2px solid;
+	}
+	#fixedTool p, h2, h3{
+		clear: both;
+	}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 1px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #484d4d;
+  border-radius: 0px;
+  border: 0px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0.1px 0.1px 0px #cccccc, 0px 0px 0.1px #d9d9d9;
+  border: 0.2px solid #cccccc;
+  height: 18px;
+  width: 18px;
+  border-radius: 21px;
+  background: #b4bdd9;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -8px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #6d7575;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #484d4d;
+  border-radius: 0px;
+  border: 0px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0.1px 0.1px 0px #cccccc, 0px 0px 0.1px #d9d9d9;
+  border: 0.2px solid #cccccc;
+  height: 18px;
+  width: 18px;
+  border-radius: 21px;
+  background: #b4bdd9;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #232525;
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #484d4d;
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0.1px 0.1px 0px #cccccc, 0px 0px 0.1px #d9d9d9;
+  border: 0.2px solid #cccccc;
+  height: 18px;
+  width: 18px;
+  border-radius: 21px;
+  background: #b4bdd9;
+  cursor: pointer;
+  height: 2px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #484d4d;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #6d7575;
+}
+
+
+.animButtonHide{
+	transition-property: transform;
+	transition-duration: 1s;
+}
+
+	.slidePicture{
+		width: 300px;
+		float: right;
+		border-radius: 100% 100% 100% 100%;
+		-moz-border-radius: 100% 100% 100% 100%;
+		-webkit-border-radius: 100% 100% 100% 100%;
+		border: 9px solid #f5f5f5;
+	}
+
+	.key{
+		    background: #8d8d8d;
+			padding: 2px;
+			color: #fff;
+			border-radius: 2px;
+	}
+	
+
+	.loader{
+	/*	transition-property: background;
+		transition-duration: 2s ;*/
+		animation: loaderChange 2s infinite;
+
+
+	}
+	@keyframes loaderChange{
+		0%{ background: #fff; }
+		50%{ background: #ccc }
+		100%{ background: #fff }
+	}
+
+</style>
+<title>LetsDraw!JS 
+</title>
+
+</head>
+
+<body id="main">
+<div class="welcome loader" id="preloaderDiv" style="z-index: 2001">
+	<div class="welcome_text" style="width: 400px; margin: 0 auto; text-align: center; margin-top: 20%" >
+			<img src="images/letsdraw.png" /> 
+			<h2 id="preloaderText"></h2>
+	</div>
+</div>
+
+
+<!--INTRODUCTION -->
+	<div class="welcome" id="slideShow"  style="display: none; z-index: 2000">
+		<div class="welcome_text" id="slide1" >
+			<h3>1 / 6</h3>
+			<h2>Представляем редактор LetsDraw!JS</h2>
+			<p>Он поможет вам создавать яркие и интересные обложки для ваших работ</p>
+			
+		</div>
+		<div class="welcome_text" id="slide2" style="display: none">
+			<h3>2 / 6</h3>
+			<div style="width: 50%; float: left">
+				<h2>Управляйте элементами</h2>
+				<p>Чтобы добавить элемент, нажмите правую кнопку мыши и выберите "Добавить". Также, доступны сочетания клавиш 
+					<span class="key">Ctrl</span>+<span  class="key">C</span>, <span class="key">Ctrl</span>+<span  class="key">V</span> и  <span class="key">Del</span></p>
+			</div>
+			<div style="float: left">
+				<img class="slidePicture" src="images/welcome/add.png"/>
+			</div>
+		</div>
+		<div class="welcome_text" id="slide3" style="display: none">
+			<h3>3 / 6</h3>
+			<div style="width: 50%; float: left">
+				<h2>Выравнивание</h2>
+				<p>Поможет выравнить элемент по-центру или по другим элементам. Вы можете отключить эту опцию в настройках</p>
+			</div>
+			<div style="float: left">
+				<img class="slidePicture" src="images/welcome/align.png"/>
+			</div>
+		</div>
+		<div class="welcome_text" id="slide4" style="display: none">
+			<h3>4 / 6</h3>
+		<div style="width: 50%; float: left">
+			<h2>Редактирование текста</h2>
+			<p>Настройка гарнитуры, заливки, обводки и другие возможности. Нажмите кнопку  <span class="key">+</span> рядом с полем выбора цвета, чтобы включить заливку градиентом</p>
+		</div>
+			<div style="float: left">
+				<img class="slidePicture"  src="images/welcome/text-edit.png"/>
+			</div>
+		</div>
+		<div class="welcome_text" id="slide5" style="display: none">
+			<h3>5 / 6</h3>
+			<div style="width: 50%; float: left">
+			<h2>Рисование от руки</h2>
+			<p>Рисуйте от руки и редактор автоматически сгладит ваш рисунок. </p>
+			</div>
+			<div style="float: left">
+					<img class="slidePicture"  src="images/welcome/paint.png"/>
+			</div>
+
+		</div>
+		<div class="welcome_text" id="slide6" style="display: none">
+			<h3>6 / 6</h3>
+		<div style="width: 50%; float: left">
+			<h2>Сохранение результатов</h2>
+			<p>Нажмите Сохранить, чтобы сохранить обложку для вашей работы. Вы можете вернуться к редактированию вновь в любой момент.</p>
+		</div>
+		<div style="float: left">
+				<img class="slidePicture"  src="images/welcome/paint.png"/>
+		</div>
+		</div>
+	<div style="clear: both; margin-left: 10%">
+		<a href="javascript:;" id="nextSlide" class="welcomeButton"> Далее </a>
+		<a href="javascript:;" id="skipSlide" class="welcomeButton"> Пропустить </a>
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		var showSlides = true;
+		var currentIndexSlide = 1;
+		var countSlide = 6;
+		nextSlide.onclick = function(e){
+			document.getElementById("slide"+currentIndexSlide).style.display = "none";
+			currentIndexSlide++;
+			if(currentIndexSlide <= countSlide)
+				document.getElementById("slide"+currentIndexSlide).style.display = "block";
+			else
+				slideShow.style.display = "none";
+
+		}
+		skipSlide.onclick = function(e){
+			slideShow.style.display = "none";
+		}
+
+
+
+	</script>
+
+	<div class="welcome" id="resultID" style="display: none">	
+		<div class="welcome_text" style="width: 400px; margin: 0 auto; text-align: center" id="slide2">
+			<h3 id="resultSave">Успешно сохранено</h3>
+			<img src="" id="resultImageID" width=300 /><br><br><br>
+			<a href="javascript:;" style="clear: both;" onclick="document.getElementById('resultID').style.display = 'none'" class="welcomeButton"> Вернуться к редактированию </a><br>
+			<p>- или -</p>
+			<a href="javascript:;" onclick="javascript:history.back();">Закрыть редактор</a>
+		</div>
+	</div>
+<!--END INRODUCTION -->
+
+<!--
+	<div style="height: 40px; border-bottom: 2px solid; padding: 10px; background: #fff">
+	<img src="images/logoWriter.png" style="float: left" width=40/> <h2 style="margin: 0; font-weight: normal"> Cover editor</h2>
+	
+</div> -->
+
+
+<div class="settingField" style="display: none">
+	<h2></h2>
+	<button id="addText">+ Добавить текст</button>
+	<button id="addRectangle">+ add rect</button>
+<textarea id="dataInfo"></textarea>
+	<button id="open">Open</button>
+
+</div>
+<div>
+	<div class="canvasPlace" style="margin: 0 auto; width: 600px">
+		<div class="container" >
+
+			<div id="mainMenuID" class="mainMenu">
+				<img src="images/letsdraw.png" style="float: left; padding: 5px" height=40/> 
+				<ul>
+				<!--	<li id="">открыть</li>-->
+					<li id="addMenuItem">add</li>
+					<li id="editMenuItem">edit</li>
+				<!--	<li id="about">About</li> -->
+					<li id="save">save</li> 
+				<!--	<li id="getImage">Get image</li>-->
+			<!--		<li id="feedback"><img src="images/smile.png"/></li> -->
+				</ul>
+				
+			</div>
+		</div> 
+	
+		<canvas id="canvas" width=560 height=360 style=" left: 500px;"></canvas> 
+			<div style="font-size: 0.7em">
+				<p>Powered by LetsDraw!JS &copy BOOKLERON &copy Andrey Kizimov</p>
+		
+			</div>
+	</div>
+	<img src="images/hide.png" id="hidePanelButton" class="animButtonHide" style="position: absolute; right: 0; top: 0; cursor: pointer;  margin-top: 10px; margin-right: 10px; z-index: 100"/>
+	<div id="rightTool" class="rightToolBar" style=""> 
+		
+		<h2 style="float: left">Settings</h2>
+		
+		<div id="fixedTool" style="clear: both">
+			
+		</div>
+	</div>
+</div>
+<!--	<button id="save">Save</button> -->
+<div id="floppyPropertyDiv" class="propertyDiv">
+
+</div>
+<div id="propertyDiv1">
+
+	</div>
+</div>
+<script src="3rd_party/jscolor.js"></script>
+<script src="3rd_party/b-spline.js"></script>
+<script src="lang.js" type="text/javascript"></script>
+<script src="letsDraw.js" type="text/javascript"></script>
+
+<script src="letsSaveDraw.js" type="text/javascript"></script>
+<script src="components.js" type="text/javascript"></script>
+<script>
+
+/**
+ *  Disable select outside canvas
+ */
+var canvas = document.getElementById('canvas');
+canvas.onselectstart = function () { return false; }
+
+LetsDraw(
+	{
+		canvasID: 'canvas',
+		lang: 'ru',
+		toolDivID: 'floppyPropertyDiv',
+		fixedToolDivID: 'fixedTool',
+		mainToolDivID: 'mainMenuID',
+		components: { textLabel, ImageComponent, RectangleComponent, CircleComponent , BezierLine, Painter },
+		debug: true,
+		backgroundColor: "#fff"
+
+	}
+);
+//textLabel.eventClick("addText");
+var addMenuItem = document.getElementById("addMenuItem");
+addMenuItem.addEventListener("click",function(e){
+	LetsDraw.showElementsList();
+});
+editMenuItem.addEventListener("click",function(e){
+	LetsDraw.contextMenu.clearMenu();
+	LetsDraw.contextMenu.prepareMenu();
+	var menu = LetsDraw.GetMenuList();
+	LetsDraw.contextMenu.addElements({
+		
+		  Delelte: menu.Delete,
+		  Copy: menu.Copy,
+		  Paste: menu.Paste,
+		  "To back": menu["To back"],
+		  "To front": menu["To front"],
+		  Lock: menu.Lock,
+
+	
+	  });
+	 LetsDraw.contextMenu.showMenu();
+})
+var idTextarea = document.getElementById("dataInfo");
+save.addEventListener("click", function(){
+	resultSave.innerText = "Ваша работа";
+	LetsSaveDraw({
+		textarea: idTextarea
+	});
+	var base64 = LetsDraw.GetBase64();
+	console.log(base64);
+	LetsDraw.getFinalImage("resultImageID");
+	var div = document.getElementById("resultID");
+	div.style.display = "block";
+//	ajaxSend(base64);
+});
+var open = document.getElementById("open");
+open.addEventListener("click", function(){
+	LetsOpenDraw(idTextarea.value);
+});
+
+
+var ajaxSend = function( base64data, type = "image", part = 0 ){
+	var xhr = new XMLHttpRequest();
+	if(type == "image"){
+		var where =  "server/sendResultImage.php";
+	}
+	if(type == "source"){
+		var where =  "server/sendResultSource.php";
+	}
+	xhr.open("POST", "http://typicalwriter.ru/coverEditor/saveImage.php", true);
+	var body = "imgData="+base64data+"&dataSource="+idTextarea.value;
+	if(type == "source"){
+		body += "&part="+part;
+	}
+	/**
+	 * Get params after hash # in url
+	 **/
+	var type =  window.location.hash.substr(1);
+	console.log(type);
+	if(type){
+		body +="&param="+type;
+	}
+
+
+	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset = UTF-8');
+	xhr.onreadystatechange = function(){
+		if(this.readyState != 4) return 1;
+		console.log(this);
+		if(this.status == 200){
+		
+			var result = JSON.parse(this.response);
+			console.log(result);
+			if(result['result'] == "success"){
+				resultSave.innerText = "Saved";
+				resultImageID.src = result['imgSrc'];
+			}
+			else{
+				resultSave.innerText = result['message'];
+			}
+		}
+		else{
+			resultSave.innerText = "error";
+			 console.log( 'error: ' + (this.status ? this.statusText : '') );
+		}
+	}
+	xhr.send(body);
+}
+
+var saveSource = function (){
+	var source = idTextarea.value;
+	var part1 = source.substr(0, source.length / 2);
+	var part2 = source.substr( source.length / 2, (source.length - source.length / 2));
+	ajaxSend(part1, "source", 0);
+	ajaxSend(part2, "source", 1);
+}
+
+/*var saveImage = document.getElementById("getImage");
+saveImage.addEventListener("click", function(){
+	console.log(123);
+	LetsDraw.getFinalImage("resultImageID");
+	var div = document.getElementById("resultID");
+	div.style.display = "block";
+});*/
+
+hidePanelButton.onclick = function(e){
+	if(rightTool.style.display == "none"){
+		rightTool.style.display = "block"
+		rightTool.style.right = 0;
+		hidePanelButton.style.transform = "rotate(0)"
+	}
+	else{
+		rightTool.style.right = -500;
+		setTimeout(function(){
+			rightTool.style.display = "none"
+		}, 1000);
+		
+		hidePanelButton.style.transform = "rotate(180deg)"
+		
+	}
+	
+}
+
+/*	document.addEventListener('DOMContentLoaded', function(){ 
+		var xhr = new XMLHttpRequest();
+	preloaderText.innerText = "Загрузка...";
+	
+	
+	
+	xhr.open("POST", "http://typicalwriter.ru/coverEditor/openSource.php", true);
+	
+
+	
+	var type =  window.location.hash.substr(1);
+	var body;
+
+	if(type){
+		body +="&param="+type;
+	}
+
+
+	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset = UTF-8');
+	xhr.onreadystatechange = function(){
+		if(this.readyState != 4) return 1;
+		console.log(this);
+		if(this.status == 200){
+		
+			var result = JSON.parse(this.response);
+			console.log(result);
+			if(result['result'] == "success"){
+				if(result['id'] > 0){
+					LetsOpenDraw(result['data']);
+				}
+				
+				preloaderDiv.style.display = "none";
+			}
+			else{
+				console.log(result['message']);
+				preloaderDiv.style.display = "none";
+			}
+		}
+		else{
+		
+			 console.log( 'ошибка: ' + (this.status ? this.statusText : 'запрос не удался') );
+			 preloaderDiv.style.display = "none";
+		}
+	}
+	xhr.send(body);
+
+	});
+*/
+setTimeout(function(){
+	 preloaderDiv.style.display = "none";
+	
+}, 2000);
+
+</script>
+
+<!--Selected: <span id="selected"></span>-->
+
+<!--<div class="textLabel" contenteditable>
+	������� ����� �����
+</div>-->
+
+</body>
+</html>

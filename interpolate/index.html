@@ -1,0 +1,111 @@
+<html>
+<head>
+<script type="text/javascript" src="b-spline/index.js"></script>
+</head>
+<body>
+
+<canvas width="400" id="canvas" height="500"></canvas>
+
+<script>
+    var mainCanvas = document.getElementById("canvas");
+    var mainContext = canvas.getContext("2d");
+    var pointArrayX =  new Array();
+    var pointArrayY = new  Array();
+	var pointPoint = new Array();
+	var i = 0;
+    var clicked = false;
+    canvas.onmousedown = function(e){
+        clicked = true;
+        var rect = this.getBoundingClientRect();
+        pointArrayX.push( e.clientX  - rect.left);
+        pointArrayY.push(e.clientY - rect.top);
+    }
+    canvas.onmousemove = function(e){
+
+        var rect = this.getBoundingClientRect();
+		i++;
+		
+        if(clicked )
+        {
+        pointArrayX.push( e.clientX  - rect.left);
+        pointArrayY.push(e.clientY - rect.top);
+        draw();
+
+		}
+		
+        
+    }
+    canvas.onmouseup = function(e){
+        clicked = false;
+        for(var i = 0; i < pointArrayX.length; i+=10){
+			pointPoint[i/10] = new Array();
+			pointPoint[i/10][0] = pointArrayX[i];
+			pointPoint[i/10][1] = pointArrayY[i];
+		}
+		drawCurve();
+		
+    }
+
+    function draw(){
+        mainContext.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+        mainContext.beginPath();
+        for(var i = 1; i < pointArrayX.length - 1; i+=2){
+            mainContext.moveTo(pointArrayX[i - 2], pointArrayY[i - 2]);
+            mainContext.lineTo(pointArrayX[i], pointArrayY[i]);
+            mainContext.stroke();
+        }
+        
+    }
+
+    function drawCurve()
+    {
+        mainContext.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+        mainContext.beginPath();
+		console.log(pointPoint);
+   /*     for(var i = 0; i < pointArrayX.length - 2; i+=10)
+        {
+       /*      mainContext.moveTo(pointArrayX[i], pointArrayY[i]);
+     
+            mainContext.quadraticCurveTo(
+                pointArrayX[i+5],
+                pointArrayY[i+5],
+                pointArrayX[i+10],
+                pointArrayY[i+10]
+
+            );
+            mainContext.stroke();*/
+		//	var point = interpolate(pointArrayX[i], 2, pointPoint);
+    //    }
+		/*	var points = [
+				  [-1.0,  0.0],
+				  [-0.5,  0.5],
+				  [ 0.5, -0.5],
+				  [ 1.0,  0.0]
+				];*/
+			var points = [
+				  [-15.0,  20],
+				  [-0.5,  30],
+				  [ 50.5, 100],
+				  [ 150.0,  0.0]
+				];
+			var pointX = 0, pointY = 0;
+			for(var t=0; t<1; t+=0.01) {
+				mainContext.moveTo(pointX, pointY);
+				
+				var point = interpolate(t, 2, pointPoint);
+				
+				mainContext.lineTo(point[0],point[1]);
+				mainContext.stroke();
+				
+				pointX = point[0];
+				pointY = point[1];
+				
+				
+				
+				
+				console.log(point);
+			}
+    }
+</script>
+</body>
+</html>
