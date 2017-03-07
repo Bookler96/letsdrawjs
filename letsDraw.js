@@ -184,7 +184,7 @@ function aboutPrint (){
 	contextMenu.prepareMenu();
 	contextMenu.addElements({
 		"Git":{
-			value: "Fork this on GitHub",
+			value: "<a target='_blank' href='https://github.com/Bookler96/letsdrawjs'>GitHub</a>",
 			action: function(){},
 			visiblePredicat: function()
 			{
@@ -192,7 +192,7 @@ function aboutPrint (){
 			}
 		},
 		"Web-site":{
-			value: "Visit LetsDraw!JS web site",
+			value: "<a target='_blank' href='http://bookleron.com/letsdraw'>Visit LetsDraw!JS web site</a>",
 			action: function(){},
 			visiblePredicat: function(){
 				return true
