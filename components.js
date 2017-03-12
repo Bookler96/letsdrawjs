@@ -51,6 +51,10 @@ textLabel.prototype.renderComponent = function(){
 							+ this.fontWeight + " "
 							+ this.fontsize + 'pt ' + this.font; 
 		
+/*		LetsDraw.mainContext.shadowColor = "black";
+		LetsDraw.mainContext.shadowOffsetX = 5; 
+		LetsDraw.mainContext.shadowOffsetY = 5; 
+		LetsDraw.mainContext.shadowBlur = 7;*/
 	
 		if(this.gradientExist){
 			var gradient = LetsDraw.mainContext.createLinearGradient(this.x, this.y, this.w + this.x, this.h + this.y);
@@ -591,7 +595,21 @@ RectangleComponent.prototype.renderComponent = function()
 	else{
 			LetsDraw.mainContext.fillStyle = this.color;
 		}
-	LetsDraw.mainContext.fillRect(this.x,this.y,this.w,this.h);
+
+/**
+ * Draw rect with smooth corner
+ */
+	LetsDraw.mainContext.beginPath();
+	LetsDraw.mainContext.moveTo(this.x, this.y);
+	LetsDraw.mainContext.lineTo(this.x + this.w - 10, this.y);
+	LetsDraw.mainContext.quadraticCurveTo(this.x + this.w , this.y , this.x + this.w , this.y +10 );
+	LetsDraw.mainContext.lineTo(this.x + this.w, this.y + this.h - 10 );
+	LetsDraw.mainContext.quadraticCurveTo(this.x + this.w , this.y + this.h , this.x + this.w -10, this.y + this.h);
+	LetsDraw.mainContext.lineTo(this.x + 5, this.y + this.h );
+	LetsDraw.mainContext.quadraticCurveTo(this.x , this.y + this.h , this.x , this.y + this.h - 10);
+
+
+//	LetsDraw.mainContext.fillRect(this.x,this.y,this.w,this.h);
 	LetsDraw.mainContext.lineWidth = this.borderWidth;
 	if(this.borderWidth > 0){
 		LetsDraw.mainContext.strokeStyle = this.border;
@@ -893,6 +911,8 @@ CircleComponent.prototype = Object.create(LetsDraw.Component.prototype);
 CircleComponent.prototype.constructor = CircleComponent;
 
 CircleComponent.prototype.renderComponent = function(){
+
+
 		LetsDraw.mainContext.beginPath();
 
 		this.h = this.w;
@@ -1296,7 +1316,7 @@ var Painter = function(){
 			name: langLD.point
 		}
 	]
-	this.lineStyleSelect = "smooth";
+	this.lineStyleSelect = "point";
 }
 Painter.prototype = Object.create(LetsDraw.Component.prototype);
 Painter.prototype.constructor = Painter;

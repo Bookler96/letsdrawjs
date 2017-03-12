@@ -5,7 +5,7 @@
 "use strict";
 (function(){
 
-    var version = '0.1';
+    var version = '0.2';
     var mainCanvas = undefined;
     var mainContext = undefined;
 
@@ -24,6 +24,13 @@
 	var backgroundColor = undefined;
 	var blockMainWork = false;
 	var indexSetBlock = -1;
+
+	var LassoEnable = false;
+	var LassoStartPoint = {
+		x: 0,
+		y: 0
+	};
+	var MultiSelectObject = new Array();
 
 	var currentIndexInLoop = -1;
 
@@ -281,19 +288,26 @@ var prevID = -1; //Previous id of selected element
 mainCanvas.onmousedown =  function(e){
 
 	
+
+
 	prevID = selectedIndex;
 	userMouse.isMouseDown = true;
+	userMouse.buttonType = e.buttons;
 	selectedIndex = userMouseUnderIndex;
 	userMouseUnderIndex = -1;
 	selectedIndex = -1;
 
-	render();
+	render(false, true);
 	
-	if(selectedIndex == -1)
+	if(selectedIndex == -1){
 		while(fixedPropertyDiv.firstChild)
 			fixedPropertyDiv.removeChild(fixedPropertyDiv.firstChild);
-
-	
+			if(userMouse.buttonType == 1){
+				LassoEnable = true;
+				LassoStartPoint.x = userMouse.x;
+				LassoStartPoint.y = userMouse.y;
+			}
+	}
 	
 	if(selectedIndex >= 0 && prevID != selectedIndex){
 
@@ -311,6 +325,7 @@ mainCanvas.onmousedown =  function(e){
 
 mainCanvas.onmouseup = function(e){
 
+	LassoEnable = false;
 	userMovingElement = false;
 	userMouse.isMouseDown = false;
 	resizeModeUse = false;
@@ -723,6 +738,7 @@ var contextMenuEvent = function(obj , data = null){
 var userMouse = {
 	x: 0,
 	y: 0,
+	buttonType: undefined,
 	absoluteX: 0,
 	absoluteY: 0,
 	isMouseMove: false,
@@ -928,8 +944,9 @@ var drawGrid = function(){
 /**
 * Drawing all elements in canvas
 *@param finalRender = false - drawing only elements without controls (for get a result picture)
+*@param canBeSelectItem = false - it current loop we can select item under mouse
 */
-var render = function(finalRender = false){
+var render = function(finalRender = false, canBeSelectItem = false){
 	mainContext.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
 	resizeExist = false; 
 
@@ -962,7 +979,7 @@ var render = function(finalRender = false){
 		)) || resizeModeUse) || selectedIndex == i  && !finalRender){
 															//	mainContext.fillStyle = 
 															
-			if (!userMovingElement && !resizeModeUse ) {
+			if (!userMovingElement && !resizeModeUse && canBeSelectItem) {
 				
 															//	selectedIndex = i;
 																userMouseUnderIndex = i;
@@ -1045,7 +1062,7 @@ var render = function(finalRender = false){
 
 	
 	//Moving and resizing
-	if(!mainBuffer.listOfComponents[i].block && !blockMainWork){
+	if(!mainBuffer.listOfComponents[i].block && !blockMainWork && userMouse.buttonType == 1){
 		//resizing
 		if((resizeModeUse || resizeExist) && userMouse.isMouseDown){
 			
@@ -1075,6 +1092,18 @@ var render = function(finalRender = false){
 				mainBuffer.listOfComponents[selectedIndex].w -=  userMouse.dX;
 				mainBuffer.listOfComponents[selectedIndex].h +=  userMouse.dY;
 			}
+
+
+			/**
+			 * Limit resize 
+			 */
+
+			if(mainBuffer.listOfComponents[selectedIndex].w < 30)
+				mainBuffer.listOfComponents[selectedIndex].w = 30;
+
+			if(mainBuffer.listOfComponents[selectedIndex].h < 30)
+				mainBuffer.listOfComponents[selectedIndex].h = 30;
+
 		}
 		else{
 			//moving
@@ -1114,9 +1143,22 @@ var render = function(finalRender = false){
 			mainCanvas.style.cursor = "ne-resize";
 	}
 	else{
+		if(userMouse.isMouseMove && userMouse.isMouseDown && selectedIndex >= 0){
+			mainCanvas.style.cursor = "move";
+		}
+		else{
+			mainCanvas.style.cursor = "auto";
+		}
 		
-		mainCanvas.style.cursor = "auto";
 	}
+
+	if(LassoEnable){
+		mainContext.globalAlpha = 0.5;
+		mainContext.fillStyle = "#C2D1D6";
+		mainContext.fillRect(LassoStartPoint.x, LassoStartPoint.y, userMouse.x, userMouse.y);
+		mainContext.globalAlpha = 1;
+	}
+
 //	userMouseUnderIndex = -1;
 };
 
