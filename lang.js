@@ -34,7 +34,8 @@
 				smooth: "Smooth",
 				point: "Point",
 				doubleClickToDraw: "Double click in area to drawing",
-				lineType: "Line type"
+				lineType: "Line type",
+				roundCorner: "Rounded corners"
 			}
 			window.langLD = en;
 		}
@@ -72,7 +73,8 @@
 				smooth: "Гладкая",
 				point: "Пунктирная",
 				doubleClickToDraw: "Дважды кликните по элементу, чтобы рисовать",
-				lineType: "Стиль линии"
+				lineType: "Стиль линии",
+				roundCorner: "Сглаживание углов"
 			}
 			window.langLD = ru;
 		}

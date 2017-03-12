@@ -445,6 +445,7 @@ var RectangleComponent = function(){
 	this.w = 100
 	this.h = 50
 	this.borderWidth = 1;
+	this.roundParam = 10;
 	this.sysName = "RectangleComponent"
 	this.border = "#000"
 	this.alphaLevel = 100;
@@ -544,6 +545,28 @@ var RectangleComponent = function(){
 		});
 		floppyPropertyDiv.appendChild(picker);
 
+		/**
+		 * Rounded corner
+		 */
+		var alphaHeader = document.createElement("h3");
+		alphaHeader.innerHTML = langLD.roundCorner;
+		alphaHeader.style.clear = "both";
+		var picker2 = document.createElement("input");
+		picker2.type = "range";
+		picker2.min = 0;
+		picker2.max = 20;
+		picker2.step = 1;
+	//	picker.style.width = "90px";
+		picker2.value = this.roundParam;
+		picker2.addEventListener("input", function(e){
+			LetsDraw.ChangeCurrentElement({
+				roundParam: (e.target.value)
+			});
+		});
+		
+
+		floppyPropertyDiv.appendChild(alphaHeader);
+		floppyPropertyDiv.appendChild(picker2);
 
 		var alphaHeader = document.createElement("h3");
 		alphaHeader.innerHTML = langLD.alpha;
@@ -600,16 +623,19 @@ RectangleComponent.prototype.renderComponent = function()
  * Draw rect with smooth corner
  */
 	LetsDraw.mainContext.beginPath();
-	LetsDraw.mainContext.moveTo(this.x, this.y);
-	LetsDraw.mainContext.lineTo(this.x + this.w - 10, this.y);
-	LetsDraw.mainContext.quadraticCurveTo(this.x + this.w , this.y , this.x + this.w , this.y +10 );
-	LetsDraw.mainContext.lineTo(this.x + this.w, this.y + this.h - 10 );
-	LetsDraw.mainContext.quadraticCurveTo(this.x + this.w , this.y + this.h , this.x + this.w -10, this.y + this.h);
-	LetsDraw.mainContext.lineTo(this.x + 5, this.y + this.h );
-	LetsDraw.mainContext.quadraticCurveTo(this.x , this.y + this.h , this.x , this.y + this.h - 10);
+	LetsDraw.mainContext.moveTo(this.x + this.roundParam*2, this.y);
+	LetsDraw.mainContext.lineTo(this.x + this.w - this.roundParam*2, this.y);
+	
+	LetsDraw.mainContext.quadraticCurveTo(this.x + this.w , this.y , this.x + this.w , this.y +this.roundParam*2 );
+	LetsDraw.mainContext.lineTo(this.x + this.w, this.y + this.h - this.roundParam*2 );
+	LetsDraw.mainContext.quadraticCurveTo(this.x + this.w , this.y + this.h , this.x + this.w -this.roundParam*2, this.y + this.h);
+	LetsDraw.mainContext.lineTo(this.x + this.roundParam*2, this.y + this.h );
+	LetsDraw.mainContext.quadraticCurveTo(this.x , this.y + this.h , this.x , this.y + this.h - this.roundParam*2);
+	LetsDraw.mainContext.lineTo(this.x, this.y + this.roundParam*2);
+	LetsDraw.mainContext.quadraticCurveTo(this.x, this.y  , this.x +this.roundParam*2, this.y );
 
-
-//	LetsDraw.mainContext.fillRect(this.x,this.y,this.w,this.h);
+	LetsDraw.mainContext.fillStyle = this.color;
+	LetsDraw.mainContext.fill();
 	LetsDraw.mainContext.lineWidth = this.borderWidth;
 	if(this.borderWidth > 0){
 		LetsDraw.mainContext.strokeStyle = this.border;
