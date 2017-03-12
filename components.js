@@ -634,7 +634,7 @@ RectangleComponent.prototype.renderComponent = function()
 	LetsDraw.mainContext.lineTo(this.x, this.y + this.roundParam*2);
 	LetsDraw.mainContext.quadraticCurveTo(this.x, this.y  , this.x +this.roundParam*2, this.y );
 
-	LetsDraw.mainContext.fillStyle = this.color;
+//	LetsDraw.mainContext.fillStyle = this.color;
 	LetsDraw.mainContext.fill();
 	LetsDraw.mainContext.lineWidth = this.borderWidth;
 	if(this.borderWidth > 0){
